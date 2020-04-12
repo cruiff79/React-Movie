@@ -1,9 +1,11 @@
 const fs = require('fs');
+const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const port = 5000;
 
-const movies = require(__dirname + '/movie.json');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const data = fs.readFileSync('./database.json');
 const conf = JSON.parse(data);
@@ -18,8 +20,32 @@ const connection = mysql.createConnection({
 connection.connect();
 
 app.get('/movie', (req, res) => {
-    console.log(movies);
-    res.send(movies);
+    let qry = 'SELECT * FROM MOVIE';
+    connection.query(qry, (err, rows) => {
+        res.send(rows);
+    });
+});
+
+app.post('/movie', (req, res) => {
+    let movie = req.body.movie;
+    let qry = 'INSERT INTO MOVIE(title, year, released, runtime, genre, director, writer, actors, description, poster, rating, type, reg_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())';
+    let title = movie.Title;
+    let year = movie.Year;
+    let released = movie.Released;
+    let runtime = movie.Runtime;
+    let genre = movie.Genre;
+    let director = movie.Director;
+    let writer = movie.Writer;
+    let actors = movie.Actors;
+    let description = movie.Plot;
+    let poster = movie.Poster;
+    let rating = movie.imdbRating;
+    let type = movie.Type;
+    let params = [title, year, released, runtime, genre, director, writer, actors, description, poster, rating, type];
+
+    connection.query(qry, params, (err, rows, fields) => {
+        res.send(rows);
+    });
 });
 
 app.listen(port, () => console.log(`movie app http://localhost:${port}`));

@@ -10,6 +10,7 @@ import { fade, withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import Grid from '@material-ui/core/Grid';
+import OmdbAPI from './components/OmdbAPI';
 
 const styles = theme => ({
   root: {
@@ -78,7 +79,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: ''
+      movies: '',
+      compMovie: true,
+      compOmdbAPI: false
     };
   }
 
@@ -111,7 +114,9 @@ class App extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
-              Movie World
+              Movie World&nbsp;
+              <a href="" onClick={(e) => {e.preventDefault(); this.setState({compMovie: true, compOmdbAPI: false})}}>Movie</a>&nbsp;
+              <a href="" onClick={(e) => {e.preventDefault(); this.setState({compMovie: false, compOmdbAPI: true})}}>OmdbAPI</a>
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -128,21 +133,25 @@ class App extends React.Component {
             </div>
           </Toolbar>
         </AppBar>
-
-        <Grid container className={classes.control}>
-            <Grid item xs={12}>
-              <Grid container justify="center">
-              {this.state.movies ? 
-                this.state.movies.map(item => {
-                  return (
-                    <Movie key={item.imdbID} title={item.Title} poster={item.Poster} year={item.Year} />
-                  );
-                })
-                : ''
-              }
+        <div className="main"></div>
+        {this.state.compMovie ?
+          <Grid container className={classes.control}>
+              <Grid item xs={12}>
+                <Grid container justify="center">
+                {this.state.movies ? 
+                  this.state.movies.map(item => {
+                    return (
+                      <Movie key={item.id} title={item.title} poster={item.poster} year={item.year} />
+                    );
+                  })
+                  : ''
+                }
+                </Grid>
               </Grid>
-            </Grid>
-        </Grid>
+          </Grid>
+        : ''}
+        
+        {this.state.compOmdbAPI ? <OmdbAPI /> : ''}
       </div>
     );
   }

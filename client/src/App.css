@@ -1,3 +1,10 @@
+.main {
+  background-image: url('./images/main_bg.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  padding-top: 300px;
+}
+
 .grid_poster {
   padding-left: 10px;
   padding-right: 10px;
@@ -6,6 +13,7 @@
   height: 232px;
   font-size: 0.8em;
 }
+
 .poster {
   width: 160px;
   height: 232px;
