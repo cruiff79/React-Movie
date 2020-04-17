@@ -19,14 +19,23 @@ const connection = mysql.createConnection({
 });
 connection.connect();
 
-app.get('/movie', (req, res) => {
+app.get('/api/movie', (req, res) => {
     let qry = 'SELECT * FROM MOVIE';
     connection.query(qry, (err, rows) => {
         res.send(rows);
     });
 });
 
-app.post('/movie', (req, res) => {
+app.get('/api/movie/:id', (req, res) => {
+    let qry = 'SELECT * FROM MOVIE WHERE ID = ?';
+    let id = req.params.id
+    let params = [id];
+    connection.query(qry, params, (err, rows) => {
+        res.send(rows);
+    });
+});
+
+app.post('/api/movie', (req, res) => {
     let movie = req.body.movie;
     let qry = 'INSERT INTO MOVIE(title, year, released, runtime, genre, director, writer, actors, description, poster, rating, type, reg_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())';
     let title = movie.Title;

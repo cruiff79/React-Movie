@@ -1,5 +1,7 @@
 import React from 'react';
+import Header from '../components/Header';
 import { post } from 'axios';
+import {Container, Row, Col} from 'react-bootstrap';
 
 class OmdbAPI extends React.Component {
     constructor(props) {
@@ -30,8 +32,8 @@ class OmdbAPI extends React.Component {
                 'Content-Type': 'application/json'
             }
         }
-        const response = post(
-            '/movie',
+        post(
+            '/api/movie',
             { movie: this.state.movie },
             {config}
         )
@@ -40,10 +42,17 @@ class OmdbAPI extends React.Component {
     render() {
         return (
             <div>
-                <input type="text" name="searchJSON" onChange={this.handleValueChange}/>
-                <button onClick={this.handleGetJSON}>Get JSON</button><br/>
-                <div>{this.state.movie ? JSON.stringify(this.state.movie) : ''}</div>
-                <button onClick={this.handleFormSubmit}>Submit to DB</button>
+                <Header />
+                <Container>
+                    <Row className="movie-list">
+                        <Col xs={12}>
+                            <input type="text" name="searchJSON" onChange={this.handleValueChange}/>
+                            <button onClick={this.handleGetJSON}>Get JSON</button><br/>
+                            <div>{this.state.movie ? JSON.stringify(this.state.movie) : ''}</div>
+                            <button onClick={this.handleFormSubmit}>Submit to DB</button>
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         );
     }
