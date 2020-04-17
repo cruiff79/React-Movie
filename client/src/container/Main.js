@@ -23,8 +23,8 @@ class Main extends React.Component {
         return body;
     }
 
-    getMovieId = (id) => {
-        this.props.handleMovieId(id);
+    getMovieInfo = (id, title) => {
+        this.props.handleMovieInfo(id, title);
     }
 
     render() {
@@ -38,7 +38,7 @@ class Main extends React.Component {
                                 return (
                                     <Col>
                                         <MovieList
-                                            getMovieId={this.getMovieId}
+                                            getMovieInfo={this.getMovieInfo}
                                             key={item.id}
                                             id={item.id}
                                             title={item.title}

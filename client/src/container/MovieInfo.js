@@ -2,13 +2,15 @@ import React from 'react';
 import Header from '../components/Header';
 import {Image} from 'react-bootstrap';
 import Player from '../images/player.png';
-import ReactPlayer from 'react-player'
+import Youtube from '../apis/Youtube';
+import VideoDetail from '../components/VideoDetail';
 
 class MovieInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          movies: ''
+          movies: '',
+          selectedVideo: null
         };
     }
 
@@ -16,6 +18,8 @@ class MovieInfo extends React.Component {
         this.callMovieDetail(this.props.id)
           .then(res => this.setState({movies: res}))
           .catch(err => console.log(err));
+
+        this.handleSubmit(this.props.title);
     }
 
     callMovieDetail = async (id) => {
@@ -25,64 +29,68 @@ class MovieInfo extends React.Component {
         return body;
     }
 
+    handleSubmit = async (termFromSearchBar) => {
+        const response = await Youtube.get('/search', {
+            params: {
+                q: termFromSearchBar + ' trailer'
+            }
+        });
+
+        this.setState({
+            selectedVideo: response.data.items[0]
+        })
+    };
+
     render() {
         return (
             <div>
                 <Header />
                 <div className="movie-detail">
                     {this.state.movies ?
-                        this.state.movies.map(item => {
-                            return (
-                                <div className="container" key={item.id}>
-                                    <div className="row">
-                                        <div className="col-4">
-                                            <div className="card">
-                                                <Image src={item.poster} rounded className="poster-detail" />
-                                            </div>
-                                        </div>
-                                        <div className="col-8">
-                                            <div className="card-body">
-                                                <h2 className="card-title">{item.title}</h2>
-                                                <p className="card-text">{item.released}</p>
-                                                <p className="card-text">{item.runtime}</p>
-                                                <p className="card-text">{item.writer}</p>
-                                                <p className="card-text">{item.rating}/10</p>
-                                                <p className="card-text">{item.genre}</p>
-                                                <p className="card-text"><a href="http://www.youtube.com" target="_blank"><Image src={Player} rounded className="player" /> Play Trailer</a></p>
-                                            </div>
-                                        </div>
+                        <div className="container" key={this.props.id}>
+                            <div className="row">
+                                <div className="col-4">
+                                    <div className="card">
+                                        <Image src={this.state.movies[0].poster} rounded className="poster-detail" />
                                     </div>
                                 </div>
-                            );
-                        })
-                    : 'no movie'
+                                <div className="col-8">
+                                    <div className="card-body">
+                                        <h2 className="card-title">{this.state.movies[0].title}</h2>
+                                        <p className="card-text">{this.state.movies[0].released}</p>
+                                        <p className="card-text">{this.state.movies[0].runtime}</p>
+                                        <p className="card-text">{this.state.movies[0].writer}</p>
+                                        <p className="card-text">{this.state.movies[0].rating}/10</p>
+                                        <p className="card-text">{this.state.movies[0].genre}</p>
+                                        <p className="card-text"><a href="http://www.youtube.com" target="_blank"><Image src={Player} rounded className="player" /> Play Trailer</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    : ''
                     }
                 </div>
                 <div>
                     {this.state.movies ?
-                            this.state.movies.map(item => {
-                                return (
-                                    <div className="container" key={item.id}>  
-                                        <div className="row"> 
-                                            <div className="col-6">
-                                                <div className="card-body">
-                                                    <h3>Overview</h3>
-                                                    <p className="card-text">{item.description}</p>
-                                                </div>
-                                            </div>
-                                            <div className="col-6">
-                                                <div className="card-body">
-                                                    <h3>Cast</h3>
-                                                    <p className="card-text">{item.actors}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <ReactPlayer url='https://www.youtube.com/watch?v=7C2z4GqqS5E' controls/>
+                        <div className="container" key={this.props.id}>  
+                            <div className="row"> 
+                                <div className="col-6">
+                                    <div className="card-body">
+                                        <h3>Overview</h3>
+                                        <p className="card-text">{this.state.movies[0].description}</p>
                                     </div>
-                                );
-                            })
-                        : ''
-                        }
+                                </div>
+                                <div className="col-6">
+                                    <div className="card-body">
+                                        <h3>Cast</h3>
+                                        <p className="card-text">{this.state.movies[0].actors}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <VideoDetail video={this.state.selectedVideo}/>
+                        </div>
+                    : ''
+                    }
                 </div>
             </div>
         );

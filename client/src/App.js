@@ -10,12 +10,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movieId: 0
+      movieId: 0,
+      movieTitle: ''
     }
   }
 
-  handleMovieId = (id) => {
-    this.setState({movieId: id});
+  handleMovieInfo = (id, title) => {
+    this.setState({
+      movieId: id,
+      movieTitle: title
+    });
   }
 
   render() {
@@ -23,13 +27,13 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Main handleMovieId={this.handleMovieId} />
+            <Main handleMovieInfo={this.handleMovieInfo} />
           </Route>
           <Route exact path="/movie">
-            <MovieHome handleMovieId={this.handleMovieId} />
+            <MovieHome handleMovieInfo={this.handleMovieInfo} />
           </Route>
           <Route exact path="/movie/:movieId">
-            <MovieInfo id={this.state.movieId} />
+            <MovieInfo id={this.state.movieId} title={this.state.movieTitle} />
           </Route>
           <Route path="/omdbAPI">
             <OmdbAPI />
