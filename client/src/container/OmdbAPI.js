@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import { post } from 'axios';
 import {Container, Row, Col} from 'react-bootstrap';
 
@@ -53,6 +54,7 @@ class OmdbAPI extends React.Component {
                         </Col>
                     </Row>
                 </Container>
+                <Footer />
             </div>
         );
     }

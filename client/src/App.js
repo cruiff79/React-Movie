@@ -3,7 +3,7 @@ import './App.css';
 import Main from './container/Main';
 import MovieHome from './container/MovieHome';
 import MovieInfo from './container/MovieInfo';
-import OmdbAPI from './components/OmdbAPI';
+import OmdbAPI from './container/OmdbAPI';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 class App extends React.Component {

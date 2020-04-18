@@ -28,7 +28,11 @@
   color: white;
 }
 
-.player {
+.movie-title {
+  padding-bottom: 50px;
+}
+
+.movie-info-icon {
   width: 20px;
   height: 20px;
 }

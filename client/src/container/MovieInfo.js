@@ -1,9 +1,15 @@
 import React from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import {Image} from 'react-bootstrap';
-import Player from '../images/player.png';
 import Youtube from '../apis/Youtube';
 import VideoDetail from '../components/VideoDetail';
+import calendar from '../images/calendar.png';
+import clock from '../images/clock.png';
+import director from '../images/director.png';
+import genre from '../images/genre.png';
+import star from '../images/star.png';
+import ReactPlayer from 'react-player';
 
 class MovieInfo extends React.Component {
     constructor(props) {
@@ -56,13 +62,12 @@ class MovieInfo extends React.Component {
                                 </div>
                                 <div className="col-8">
                                     <div className="card-body">
-                                        <h2 className="card-title">{this.state.movies[0].title}</h2>
-                                        <p className="card-text">{this.state.movies[0].released}</p>
-                                        <p className="card-text">{this.state.movies[0].runtime}</p>
-                                        <p className="card-text">{this.state.movies[0].writer}</p>
-                                        <p className="card-text">{this.state.movies[0].rating}/10</p>
-                                        <p className="card-text">{this.state.movies[0].genre}</p>
-                                        <p className="card-text"><a href="http://www.youtube.com" target="_blank"><Image src={Player} rounded className="player" /> Play Trailer</a></p>
+                                        <h2 className="card-title movie-title">{this.state.movies[0].title}</h2>
+                                        <p className="card-text"><Image src={calendar} className="movie-info-icon" />&nbsp; {this.state.movies[0].released}</p>
+                                        <p className="card-text"><Image src={clock} className="movie-info-icon" />&nbsp; {this.state.movies[0].runtime}</p>
+                                        <p className="card-text"><Image src={director} className="movie-info-icon" />&nbsp; {this.state.movies[0].director}</p>
+                                        <p className="card-text"><Image src={star} className="movie-info-icon" />&nbsp; {this.state.movies[0].rating}</p>
+                                        <p className="card-text"><Image src={genre} className="movie-info-icon" />&nbsp; {this.state.movies[0].genre}</p>
                                     </div>
                                 </div>
                             </div>
@@ -87,11 +92,12 @@ class MovieInfo extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            <VideoDetail video={this.state.selectedVideo}/>
+                            {this.state.selectedVideo ? <VideoDetail video={this.state.selectedVideo}/> : <ReactPlayer url='https://www.youtube.com/watch?v=9ZfN87gSjvI' width="100%" height="500px" />}
                         </div>
                     : ''
                     }
                 </div>
+                <Footer />
             </div>
         );
     }

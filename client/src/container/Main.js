@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import MovieList from '../components/MovieList';
 import {Container, Row, Col} from 'react-bootstrap';
 
@@ -52,6 +53,7 @@ class Main extends React.Component {
                         }
                     </Row>
                 </Container>
+                <Footer />
             </div>
         );
     }
