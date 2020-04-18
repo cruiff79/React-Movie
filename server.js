@@ -20,8 +20,10 @@ const connection = mysql.createConnection({
 connection.connect();
 
 app.get('/api/movie', (req, res) => {
-    let qry = 'SELECT * FROM MOVIE';
-    connection.query(qry, (err, rows) => {
+    let qry = 'SELECT * FROM MOVIE WHERE TYPE = ?';
+    let type = 'movie'
+    let params = [type];
+    connection.query(qry, params, (err, rows) => {
         res.send(rows);
     });
 });
