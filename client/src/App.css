@@ -32,3 +32,9 @@
   width: 20px;
   height: 20px;
 }
+
+footer {
+  padding-top: 100px;
+  padding-bottom: 20px;
+  text-align: center;
+}
