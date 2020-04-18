@@ -1,31 +1,31 @@
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import MovieList from '../components/MovieList';
+import VideoList from '../components/VideoList';
 import {Container, Row, Col} from 'react-bootstrap';
 
-class MovieHome extends React.Component {
+class VideoHome extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          movies: ''
+          videos: ''
         };
     }
 
     componentDidMount() {
-        this.callMovies()
-          .then(res => this.setState({movies: res}))
+        this.callVideos()
+          .then(res => this.setState({videos: res}))
           .catch(err => console.log(err));
     }
 
-    callMovies = async () => {
-        const response = await fetch('/api/movie');
+    callVideos = async () => {
+        const response = await fetch('/api/video/type/' + this.props.types);
         const body = await response.json();
         return body;
     }
 
-    getMovieInfo = (id, title) => {
-        this.props.handleMovieInfo(id, title);
+    getVideoInfo = (id, title) => {
+        this.props.handleVideoInfo(id, title);
     }
 
     render() {
@@ -34,12 +34,13 @@ class MovieHome extends React.Component {
                 <Header />
                 <Container>
                     <Row className="show-grid movie-list">
-                        {this.state.movies ?
-                            this.state.movies.map(item => {
+                        {this.state.videos ?
+                            this.state.videos.map(item => {
                                 return (
                                     <Col>
-                                        <MovieList
-                                            getMovieInfo={this.getMovieInfo}
+                                        <VideoList
+                                            types={this.props.types}
+                                            getVideoInfo={this.getVideoInfo}
                                             key={item.id}
                                             id={item.id}
                                             title={item.title}
@@ -59,4 +60,4 @@ class MovieHome extends React.Component {
     }
 }
 
-export default MovieHome;
+export default VideoHome;

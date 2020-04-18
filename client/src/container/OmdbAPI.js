@@ -34,7 +34,7 @@ class OmdbAPI extends React.Component {
             }
         }
         post(
-            '/api/movie',
+            '/api/video',
             { movie: this.state.movie },
             {config}
         )

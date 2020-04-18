@@ -2,15 +2,15 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import {Image} from 'react-bootstrap';
 
-class Movie extends React.Component {
-    setMovieInfo = () => {
-        this.props.getMovieInfo(this.props.id, this.props.title);
+class VideoList extends React.Component {
+    setVideoInfo = () => {
+        this.props.getVideoInfo(this.props.id, this.props.title);
     }
 
     render() {
         return (
             <div>
-                <Link to={`/movie/${this.props.id}`} onClick={this.setMovieInfo}><Image src={this.props.poster} rounded className="poster" /></Link>
+                <Link to={`/${this.props.types}/${this.props.id}`} onClick={this.setVideoInfo}><Image src={this.props.poster} rounded className="poster" /></Link>
                 <div className="poster-title">
                     {this.props.title}
                 </div>
@@ -22,4 +22,4 @@ class Movie extends React.Component {
     }
 }
 
-export default Movie;
+export default VideoList;

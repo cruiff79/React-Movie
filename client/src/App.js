@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import Main from './container/Main';
-import MovieHome from './container/MovieHome';
-import MovieInfo from './container/MovieInfo';
+import VideoHome from './container/VideoHome';
+import VideoInfo from './container/VideoInfo';
 import OmdbAPI from './container/OmdbAPI';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
@@ -10,15 +10,15 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movieId: 0,
-      movieTitle: ''
+      videoId: 0,
+      videoTitle: ''
     }
   }
 
-  handleMovieInfo = (id, title) => {
+  handleVideoInfo = (id, title) => {
     this.setState({
-      movieId: id,
-      movieTitle: title
+      videoId: id,
+      videoTitle: title
     });
   }
 
@@ -27,13 +27,19 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Main handleMovieInfo={this.handleMovieInfo} />
+            <Main types='movie' handleVideoInfo={this.handleVideoInfo} />
           </Route>
           <Route exact path="/movie">
-            <MovieHome handleMovieInfo={this.handleMovieInfo} />
+            <VideoHome types='movie' handleVideoInfo={this.handleVideoInfo} />
           </Route>
-          <Route exact path="/movie/:movieId">
-            <MovieInfo id={this.state.movieId} title={this.state.movieTitle} />
+          <Route exact path="/tv">
+            <VideoHome types='tv' handleVideoInfo={this.handleVideoInfo} />
+          </Route>
+          <Route exact path="/movie/:videoId">
+            <VideoInfo id={this.state.videoId} title={this.state.videoTitle} />
+          </Route>
+          <Route exact path="/tv/:videoId">
+            <VideoInfo id={this.state.videoId} title={this.state.videoTitle} />
           </Route>
           <Route path="/omdbAPI">
             <OmdbAPI />

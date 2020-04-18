@@ -11,25 +11,25 @@ import genre from '../images/genre.png';
 import star from '../images/star.png';
 import ReactPlayer from 'react-player';
 
-class MovieInfo extends React.Component {
+class VideoInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          movies: '',
+          videos: '',
           selectedVideo: null
         };
     }
 
     componentDidMount() {
-        this.callMovieDetail(this.props.id)
-          .then(res => this.setState({movies: res}))
+        this.callVideoDetail()
+          .then(res => this.setState({videos: res}))
           .catch(err => console.log(err));
 
         this.handleSubmit(this.props.title);
     }
 
-    callMovieDetail = async (id) => {
-        const url = '/api/movie/' + id;
+    callVideoDetail = async () => {
+        const url = '/api/video/' + this.props.id;
         const response = await fetch(url);
         const body = await response.json();
         return body;
@@ -52,22 +52,22 @@ class MovieInfo extends React.Component {
             <div>
                 <Header />
                 <div className="movie-detail">
-                    {this.state.movies ?
+                    {this.state.videos ?
                         <div className="container" key={this.props.id}>
                             <div className="row">
                                 <div className="col-4">
                                     <div className="card">
-                                        <Image src={this.state.movies[0].poster} rounded className="poster-detail" />
+                                        <Image src={this.state.videos[0].poster} rounded className="poster-detail" />
                                     </div>
                                 </div>
                                 <div className="col-8">
                                     <div className="card-body">
-                                        <h2 className="card-title movie-title">{this.state.movies[0].title}</h2>
-                                        <p className="card-text"><Image src={calendar} className="movie-info-icon" />&nbsp; {this.state.movies[0].released}</p>
-                                        <p className="card-text"><Image src={clock} className="movie-info-icon" />&nbsp; {this.state.movies[0].runtime}</p>
-                                        <p className="card-text"><Image src={director} className="movie-info-icon" />&nbsp; {this.state.movies[0].director}</p>
-                                        <p className="card-text"><Image src={star} className="movie-info-icon" />&nbsp; {this.state.movies[0].rating}</p>
-                                        <p className="card-text"><Image src={genre} className="movie-info-icon" />&nbsp; {this.state.movies[0].genre}</p>
+                                        <h2 className="card-title movie-title">{this.state.videos[0].title}</h2>
+                                        <p className="card-text"><Image src={calendar} className="movie-info-icon" />&nbsp; {this.state.videos[0].released}</p>
+                                        <p className="card-text"><Image src={clock} className="movie-info-icon" />&nbsp; {this.state.videos[0].runtime}</p>
+                                        <p className="card-text"><Image src={director} className="movie-info-icon" />&nbsp; {this.state.videos[0].director}</p>
+                                        <p className="card-text"><Image src={star} className="movie-info-icon" />&nbsp; {this.state.videos[0].rating}</p>
+                                        <p className="card-text"><Image src={genre} className="movie-info-icon" />&nbsp; {this.state.videos[0].genre}</p>
                                     </div>
                                 </div>
                             </div>
@@ -76,19 +76,19 @@ class MovieInfo extends React.Component {
                     }
                 </div>
                 <div>
-                    {this.state.movies ?
+                    {this.state.videos ?
                         <div className="container" key={this.props.id}>  
                             <div className="row"> 
                                 <div className="col-6">
                                     <div className="card-body">
                                         <h3>Overview</h3>
-                                        <p className="card-text">{this.state.movies[0].description}</p>
+                                        <p className="card-text">{this.state.videos[0].description}</p>
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="card-body">
                                         <h3>Cast</h3>
-                                        <p className="card-text">{this.state.movies[0].actors}</p>
+                                        <p className="card-text">{this.state.videos[0].actors}</p>
                                     </div>
                                 </div>
                             </div>
@@ -103,4 +103,4 @@ class MovieInfo extends React.Component {
     }
 }
 
-export default MovieInfo;
+export default VideoInfo;
