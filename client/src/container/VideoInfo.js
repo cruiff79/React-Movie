@@ -1,6 +1,4 @@
 import React from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import {Image} from 'react-bootstrap';
 import Youtube from '../apis/Youtube';
 import VideoDetail from '../components/VideoDetail';
@@ -50,7 +48,6 @@ class VideoInfo extends React.Component {
     render() {
         return (
             <div>
-                <Header />
                 <div className="movie-detail">
                     {this.state.videos ?
                         <div className="container" key={this.props.id}>
@@ -97,7 +94,6 @@ class VideoInfo extends React.Component {
                     : ''
                     }
                 </div>
-                <Footer />
             </div>
         );
     }

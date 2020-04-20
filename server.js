@@ -32,9 +32,15 @@ app.get('/api/video/type/:type', (req, res) => {
 app.get('/api/video/:id', (req, res) => {
     let qry = 'SELECT * FROM MOVIE WHERE ID = ?';
     let id = req.params.id
-    console.log('id: ', id);
     let params = [id];
     connection.query(qry, params, (err, rows) => {
+        res.send(rows);
+    });
+});
+
+app.get('/api/video/search/:search', (req, res) => {
+    let qry = "SELECT * FROM MOVIE WHERE TITLE LIKE " + "'%" + req.params.search + "%'";
+    connection.query(qry, (err, rows) => {
         res.send(rows);
     });
 });

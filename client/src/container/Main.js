@@ -1,6 +1,4 @@
 import React from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import VideoList from '../components/VideoList';
 import {Container, Row, Col} from 'react-bootstrap';
 
@@ -31,7 +29,6 @@ class Main extends React.Component {
     render() {
         return (
             <div>
-                <Header />
                 <Container>
                     <Row className="show-grid movie-list">
                         {this.state.videos ?
@@ -39,7 +36,7 @@ class Main extends React.Component {
                                 return (
                                     <Col>
                                         <VideoList
-                                            types={this.props.types}
+                                            types={item.type}
                                             getVideoInfo={this.getVideoInfo}
                                             key={item.id}
                                             id={item.id}
@@ -53,8 +50,7 @@ class Main extends React.Component {
                         : ''
                         }
                     </Row>
-                </Container>
-                <Footer />
+                </Container>                
             </div>
         );
     }

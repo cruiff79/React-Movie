@@ -8,9 +8,11 @@ class VideoList extends React.Component {
     }
 
     render() {
+        let type = this.props.types;
+        if(type === 'series') type = 'tv';
         return (
             <div>
-                <Link to={`/${this.props.types}/${this.props.id}`} onClick={this.setVideoInfo}><Image src={this.props.poster} rounded className="poster" /></Link>
+                <Link to={`/${type}/${this.props.id}`} onClick={this.setVideoInfo}><Image src={this.props.poster} rounded className="poster" /></Link>
                 <div className="poster-title">
                     {this.props.title}
                 </div>

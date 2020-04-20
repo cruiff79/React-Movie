@@ -2,7 +2,7 @@ import React from 'react';
 import VideoList from '../components/VideoList';
 import {Container, Row, Col} from 'react-bootstrap';
 
-class VideoHome extends React.Component {
+class SearchVideo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -11,13 +11,13 @@ class VideoHome extends React.Component {
     }
 
     componentDidMount() {
-        this.callVideos()
-          .then(res => this.setState({videos: res}))
-          .catch(err => console.log(err));
+        this.searchVideos()
+            .then(res => this.setState({videos: res}))
+            .catch(err => console.log(err));
     }
 
-    callVideos = async () => {
-        const response = await fetch('/api/video/type/' + this.props.types);
+    searchVideos = async () => {
+        const response = await fetch('/api/video/search/' + this.props.search);
         const body = await response.json();
         return body;
     }
@@ -30,6 +30,7 @@ class VideoHome extends React.Component {
         return (
             <div>
                 <Container>
+                    <div className="searchBy"><h2>Search by: {this.props.search}</h2></div>
                     <Row className="show-grid movie-list">
                         {this.state.videos ?
                             this.state.videos.map(item => {
@@ -56,4 +57,4 @@ class VideoHome extends React.Component {
     }
 }
 
-export default VideoHome;
+export default SearchVideo;
