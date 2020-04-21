@@ -63,7 +63,7 @@ class VideoInfo extends React.Component {
                                         <p className="card-text"><Image src={calendar} className="movie-info-icon" />&nbsp; {this.state.videos[0].released}</p>
                                         <p className="card-text"><Image src={clock} className="movie-info-icon" />&nbsp; {this.state.videos[0].runtime}</p>
                                         <p className="card-text"><Image src={director} className="movie-info-icon" />&nbsp; {this.state.videos[0].director}</p>
-                                        <p className="card-text"><Image src={star} className="movie-info-icon" />&nbsp; {this.state.videos[0].rating}</p>
+                                        <p className="card-text"><Image src={star} className="movie-info-icon" />&nbsp; {this.state.videos[0].imdbRating}</p>
                                         <p className="card-text"><Image src={genre} className="movie-info-icon" />&nbsp; {this.state.videos[0].genre}</p>
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@ class VideoInfo extends React.Component {
                                 <div className="col-6">
                                     <div className="card-body">
                                         <h3>Overview</h3>
-                                        <p className="card-text">{this.state.videos[0].description}</p>
+                                        <p className="card-text">{this.state.videos[0].plot}</p>
                                     </div>
                                 </div>
                                 <div className="col-6">

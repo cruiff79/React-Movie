@@ -47,7 +47,7 @@ app.get('/api/video/search/:search', (req, res) => {
 
 app.post('/api/video', (req, res) => {
     let movie = req.body.movie;
-    let qry = 'INSERT INTO MOVIE(title, year, released, runtime, genre, director, writer, actors, description, poster, rating, type, reg_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())';
+    let qry = 'INSERT INTO MOVIE(title, year, released, runtime, genre, director, writer, actors, plot, language, country, awards, poster, imdbRating, imdbVotes, imdbID, type, reg_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())';
     let title = movie.Title;
     let year = movie.Year;
     let released = movie.Released;
@@ -56,13 +56,19 @@ app.post('/api/video', (req, res) => {
     let director = movie.Director;
     let writer = movie.Writer;
     let actors = movie.Actors;
-    let description = movie.Plot;
+    let plot = movie.Plot;
+    let language = movie.Language;
+    let country = movie.Country;
+    let awards = movie.Awards;
     let poster = movie.Poster;
-    let rating = movie.imdbRating;
+    let imdbRating = movie.imdbRating;
+    let imdbVotes = movie.imdbVotes;
+    let imdbID = movie.imdbID;
     let type = movie.Type;
-    let params = [title, year, released, runtime, genre, director, writer, actors, description, poster, rating, type];
+    let params = [title, year, released, runtime, genre, director, writer, actors, plot, language, country, awards, poster, imdbRating, imdbVotes, imdbID, type];
 
     connection.query(qry, params, (err, rows, fields) => {
+        if(err) console.log(err);
         res.send(rows);
     });
 });
