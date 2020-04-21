@@ -41,7 +41,7 @@ class SearchVideo extends React.Component {
         return (
             <div>
                 <Container>
-                    <div className="searchBy"><h2>Search by: {this.props.search}</h2></div>
+                    <div className="subTitle"><h2>Search by: {this.props.search}</h2></div>
                     <Row className="show-grid movie-list">
                         {this.state.videos ?
                             this.state.videos.map(item => {

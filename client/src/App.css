@@ -43,6 +43,14 @@ footer {
   text-align: center;
 }
 
-.searchBy {
+.subTitle {
   padding-top: 30px;
+}
+
+.navItem {
+  padding-right: 20px;
+}
+
+.youtube {
+  padding-top: 50px;
 }

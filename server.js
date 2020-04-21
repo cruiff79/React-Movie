@@ -19,12 +19,35 @@ const connection = mysql.createConnection({
 });
 connection.connect();
 
+app.get('/api/video/popular/:type', (req, res) => {
+    let qry = "SELECT * FROM MOVIE WHERE TYPE = ? ORDER BY CAST(REPLACE(imdbVotes, ',', '') AS UNSIGNED) DESC LIMIT 12";
+    let type = req.params.type;
+    if(type == 'tv') type = 'series';
+    let params = [type];
+    connection.query(qry, params, (err, rows) => {
+        if(err) console.log(err);
+        res.send(rows);
+    });
+});
+
+app.get('/api/video/topRated/:type', (req, res) => {
+    let qry = "SELECT * FROM MOVIE WHERE TYPE = ? ORDER BY imdbRating DESC LIMIT 12";
+    let type = req.params.type;
+    if(type == 'tv') type = 'series';
+    let params = [type];
+    connection.query(qry, params, (err, rows) => {
+        if(err) console.log(err);
+        res.send(rows);
+    });
+});
+
 app.get('/api/video/type/:type', (req, res) => {
     let qry = 'SELECT * FROM MOVIE WHERE TYPE = ?';
     let type = req.params.type;
     if(type == 'tv') type = 'series';
     let params = [type];
     connection.query(qry, params, (err, rows) => {
+        if(err) console.log(err);
         res.send(rows);
     });
 });
@@ -34,6 +57,7 @@ app.get('/api/video/:id', (req, res) => {
     let id = req.params.id
     let params = [id];
     connection.query(qry, params, (err, rows) => {
+        if(err) console.log(err);
         res.send(rows);
     });
 });
@@ -41,6 +65,7 @@ app.get('/api/video/:id', (req, res) => {
 app.get('/api/video/search/:search', (req, res) => {
     let qry = "SELECT * FROM MOVIE WHERE TITLE LIKE " + "'%" + req.params.search + "%'";
     connection.query(qry, (err, rows) => {
+        if(err) console.log(err);
         res.send(rows);
     });
 });

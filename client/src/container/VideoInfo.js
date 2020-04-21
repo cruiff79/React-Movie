@@ -89,11 +89,15 @@ class VideoInfo extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            {this.state.selectedVideo ? <VideoDetail video={this.state.selectedVideo}/> : <ReactPlayer url='https://www.youtube.com/watch?v=9ZfN87gSjvI' width="100%" height="500px" />}
                         </div>
                     : ''
                     }
                 </div>
+                <div className="youtube">
+                    {this.state.selectedVideo ?
+                        <VideoDetail video={this.state.selectedVideo}/>
+                    : <ReactPlayer url='https://www.youtube.com/watch?v=9ZfN87gSjvI' width="100%" height="500px" />
+                }</div>
             </div>
         );
     }
