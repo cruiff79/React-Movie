@@ -11,13 +11,24 @@ class SearchVideo extends React.Component {
     }
 
     componentDidMount() {
-        this.searchVideos()
+        this.handleSearch(this.props.search);
+    }
+
+    shouldComponentUpdate(nextProps) {
+        if(this.props.search !== nextProps.search) {
+            this.handleSearch(nextProps.search);
+        }
+        return true;
+    }
+
+    handleSearch = (search) => {
+        this.searchVideos(search)
             .then(res => this.setState({videos: res}))
             .catch(err => console.log(err));
     }
 
-    searchVideos = async () => {
-        const response = await fetch('/api/video/search/' + this.props.search);
+    searchVideos = async (search) => {
+        const response = await fetch('/api/video/search/' + search);
         const body = await response.json();
         return body;
     }
