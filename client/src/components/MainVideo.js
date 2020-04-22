@@ -55,11 +55,11 @@ class MainVideo extends React.Component {
                         <Nav.Link href="#tv" onClick={() => {this.setState({type: 'tv'});}}>TV</Nav.Link>
                     </Nav.Item>
                 </Nav>
-                <Row className="show-grid movie-list">
+                <Row className="show-grid">
                     {this.state.videos ?
                         this.state.videos.map(item => {
                             return (
-                                <Col>
+                                <div className="movie-list">
                                     <VideoList
                                         types={item.type}
                                         getVideoInfo={this.getVideoInfo}
@@ -69,7 +69,7 @@ class MainVideo extends React.Component {
                                         poster={item.poster}
                                         year={item.year}
                                     />
-                                </Col>
+                                </div>
                             );
                         })
                     : ''

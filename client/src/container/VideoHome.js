@@ -30,11 +30,11 @@ class VideoHome extends React.Component {
         return (
             <div>
                 <Container>
-                    <Row className="show-grid movie-list">
+                    <Row className="show-grid">
                         {this.state.videos ?
                             this.state.videos.map(item => {
                                 return (
-                                    <Col>
+                                    <div className="movie-list">
                                         <VideoList
                                             types={item.type}
                                             getVideoInfo={this.getVideoInfo}
@@ -44,7 +44,7 @@ class VideoHome extends React.Component {
                                             poster={item.poster}
                                             year={item.year}
                                         />
-                                    </Col>
+                                    </div>
                                 );
                             })
                         : ''

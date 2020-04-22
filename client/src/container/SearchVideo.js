@@ -41,12 +41,12 @@ class SearchVideo extends React.Component {
         return (
             <div>
                 <Container>
-                    <div className="subTitle"><h2>Search by: {this.props.search}</h2></div>
-                    <Row className="show-grid movie-list">
+                    <div className="subTitle"><h2>Result for: {this.props.search}</h2></div>
+                    <Row className="show-grid">
                         {this.state.videos ?
                             this.state.videos.map(item => {
                                 return (
-                                    <Col>
+                                    <div className="movie-list">
                                         <VideoList
                                             types={item.type}
                                             getVideoInfo={this.getVideoInfo}
@@ -56,7 +56,7 @@ class SearchVideo extends React.Component {
                                             poster={item.poster}
                                             year={item.year}
                                         />
-                                    </Col>
+                                    </div>
                                 );
                             })
                         : ''
