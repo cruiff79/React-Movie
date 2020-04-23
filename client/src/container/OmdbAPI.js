@@ -89,7 +89,7 @@ class OmdbAPI extends React.Component {
                                 <div>
                                     {this.state.movie ?
                                         <div>
-                                            <div><h2>{this.state.movie.Title}</h2></div>
+                                            <div><h2>{this.state.movie.Title}</h2>({this.state.movie.Year})</div>
                                             <div><Image src={this.state.movie.Poster} /></div>
                                         </div>
                                     : 'There is no data.'
