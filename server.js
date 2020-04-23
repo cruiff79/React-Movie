@@ -93,8 +93,14 @@ app.post('/api/video', (req, res) => {
     let params = [title, year, released, runtime, genre, director, writer, actors, plot, language, country, awards, poster, imdbRating, imdbVotes, imdbID, type];
 
     connection.query(qry, params, (err, rows, fields) => {
-        if(err) console.log(err);
-        res.send(rows);
+        if(err) {
+            console.log('err: ', err.sqlMessage);
+            res.send(err.sqlMessage);
+        }
+        if(rows) {
+            console.log('rows: ', rows);
+            res.send('Submited!');
+        }
     });
 });
 

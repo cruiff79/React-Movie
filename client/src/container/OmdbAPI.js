@@ -48,7 +48,7 @@ class OmdbAPI extends React.Component {
                 'Content-Type': 'application/json'
             }
         }
-        
+
         post(
             '/api/video',
             { movie: this.state.movie },
@@ -58,7 +58,7 @@ class OmdbAPI extends React.Component {
                 search: '',
                 movie: null
             });
-            this.handleShow('Submited');
+            this.handleShow(res.data);
         })
     }
 
@@ -82,7 +82,7 @@ class OmdbAPI extends React.Component {
                         <Col md={4}>  
                             <MDBCol md="12">
                                 <MDBFormInline className="md-form mr-auto mb-4">
-                                    <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" onChange={this.handleValueChange} />
+                                    <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" value={this.state.search} onChange={this.handleValueChange} />
                                     <MDBBtn gradient="aqua" rounded size="sm" type="submit" className="mr-auto" onClick={this.handleGetJSON}>Search</MDBBtn>
                                 </MDBFormInline>
                                 {/* <div>{this.state.movie ? JSON.stringify(this.state.movie.Poster) : ''}</div> */}
