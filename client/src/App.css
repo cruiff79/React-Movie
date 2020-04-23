@@ -54,3 +54,12 @@ footer {
 .youtube {
   padding-top: 50px;
 }
+
+.omdbAPI {
+  text-align: center;
+  padding-top: 50px;
+}
+
+.mdbView {
+  cursor:pointer;
+ }

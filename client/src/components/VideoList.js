@@ -21,19 +21,21 @@ class VideoList extends React.Component {
                 <MDBContainer>
                     <MDBRow>
                         <MDBCol>
+                            <Link to={`/${type}/${this.props.id}`} onClick={this.setVideoInfo}>
                             <MDBView hover>
-                                <Link to={`/${type}/${this.props.id}`} onClick={this.setVideoInfo}><Image src={this.props.poster} rounded className="poster" /></Link>
+                                <Image src={this.props.poster} rounded className="poster" />
                                 <MDBMask className="flex-center" overlay="black-strong">
                                     <p className="white-text"><Image src={star} className="movie-info-icon" />{this.props.rating}</p>
                                 </MDBMask>
                             </MDBView>
+                            </Link>
                         </MDBCol>
                     </MDBRow>
                     <div className="poster-title">
-                        {title}
+                        <Link to={`/${type}/${this.props.id}`} onClick={this.setVideoInfo}>{title}</Link>
                     </div>
                     <div className="poster-year">
-                        {this.props.year}
+                        <Link to={`/${type}/${this.props.id}`} onClick={this.setVideoInfo}>{this.props.year}</Link>
                     </div>
                 </MDBContainer>
                 {/* <div class="row">

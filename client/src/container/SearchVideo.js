@@ -1,6 +1,6 @@
 import React from 'react';
 import VideoList from '../components/VideoList';
-import {Container, Row, Col} from 'react-bootstrap';
+import {Container, Row} from 'react-bootstrap';
 
 class SearchVideo extends React.Component {
     constructor(props) {

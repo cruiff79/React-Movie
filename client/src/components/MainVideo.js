@@ -1,6 +1,6 @@
 import React from 'react';
 import VideoList from './VideoList';
-import {Row, Col, Nav} from 'react-bootstrap';
+import {Row, Nav} from 'react-bootstrap';
 
 class MainVideo extends React.Component {
     constructor(props) {
