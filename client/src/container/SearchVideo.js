@@ -55,6 +55,7 @@ class SearchVideo extends React.Component {
                                             title={item.title}
                                             poster={item.poster}
                                             year={item.year}
+                                            rating={item.imdbRating}
                                         />
                                     </div>
                                 );
