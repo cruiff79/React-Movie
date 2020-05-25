@@ -2,6 +2,11 @@
   color: white;
 }
 
+.movie-logo {
+  width: 100px;
+  height: 45px;
+}
+
 .movie-list {
   padding-top: 30px;
 }

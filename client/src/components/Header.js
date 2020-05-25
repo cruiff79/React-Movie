@@ -1,10 +1,7 @@
 import React from 'react';
-import {Navbar} from 'react-bootstrap';
-import {Nav} from 'react-bootstrap';
-import {Form} from 'react-bootstrap';
-import {FormControl} from 'react-bootstrap';
-import {Button} from 'react-bootstrap';
+import {Nav, Navbar, Form, FormControl, Button, Image} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import movie from '../images/movie.png';
 
 class Header extends React.Component {
     constructor(props) {
@@ -27,7 +24,7 @@ class Header extends React.Component {
     render() {
         return (
             <Navbar bg="dark" variant="dark" expand="lg">
-                <Navbar.Brand href="/"><span className="navbar-font">Movie World</span></Navbar.Brand>
+                <Navbar.Brand href="/"><span className="navbar-font"><Image src={movie} className="movie-logo"  /></span></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
